@@ -12,8 +12,10 @@ public class AshBehavior : MonoBehaviour
     public Material [] materials;
     private NavMeshAgent agent;
     private CubeBehavior cubeDestination;
+    public int colorIndex;
+    public bool loaded = false;
     
-    void Start()
+    public void Initialize()
     {
         if(materials == null || materials.Length < 4)
         {
@@ -22,9 +24,14 @@ public class AshBehavior : MonoBehaviour
         }
         else 
         {
-            int index = Random.Range(0,3);
-            GetComponent<Renderer>().material = materials[index];
+            if (!loaded)
+            {
+                colorIndex = Random.Range(0,3);
+
+            }
+            GetComponent<Renderer>().material = materials[colorIndex];
         }
+
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -37,9 +44,12 @@ public class AshBehavior : MonoBehaviour
 
     private void ChangeColor()          // transposotion d un algortihme d inversion  
     {
-        Material mat = GetComponent<Renderer>().material;
-        GetComponent<Renderer>().material = cubeDestination.GetComponent<Renderer>().material;
-        cubeDestination.GetComponent<Renderer>().material = mat;
+        int exchange = colorIndex;
+        colorIndex = cubeDestination.colorIndex;
+        cubeDestination.colorIndex = exchange;
+
+        GetComponent<Renderer>().material = materials[colorIndex];
+        cubeDestination.GetComponent<Renderer>().material = materials[cubeDestination.colorIndex];
     }
 
     // Update is called once per frame

@@ -5,19 +5,22 @@ using UnityEngine;
 public class CubeBehavior : MonoBehaviour
 {
     public AshBehavior ash;
-
+    public int colorIndex;
+    public bool loaded = false;
 
     // Start is called before the first frame update
-    void Start()
+    public void Initialize()
     {
-        int index = Random.Range(0,4);
+        if (!loaded)
+            colorIndex = Random.Range(0,4);
+        
 
         if(ash == null)
         {
             ash = FindObjectOfType<AshBehavior>();
         }
 
-        Material mat = ash.materials[index];
+        Material mat = ash.materials[colorIndex];
         GetComponent<Renderer>().material = mat;
     }
 
