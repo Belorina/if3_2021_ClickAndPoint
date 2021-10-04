@@ -35,8 +35,23 @@ public class AshBehavior : MonoBehaviour
 
     }
 
+    private void ChangeColor()          // transposotion d un algortihme d inversion  
+    {
+        Material mat = GetComponent<Renderer>().material;
+        GetComponent<Renderer>().material = cubeDestination.GetComponent<Renderer>().material;
+        cubeDestination.GetComponent<Renderer>().material = mat;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if(cubeDestination != null) 
+        {
+            if(Vector3.Distance(cubeDestination.transform.position, transform.position) < 0.5f)
+            {
+                ChangeColor();
+                cubeDestination = null;
+            }
+        }
     }
 }
