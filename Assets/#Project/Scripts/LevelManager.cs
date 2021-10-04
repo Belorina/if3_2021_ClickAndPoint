@@ -54,7 +54,7 @@ public class LevelManager : MonoBehaviour
 
     public void Load()
     {
-        GameData data;
+        GameData data = null;       // initialiser avce valeure vide sinon erreur!  
 
         if (File.Exists(Application.persistentDataPath + "/data.dat"))
         {
@@ -70,7 +70,7 @@ public class LevelManager : MonoBehaviour
                 file.Close();
             }
         }
-        
+
         Initialize(data);
     }
 
@@ -123,6 +123,7 @@ public class LevelManager : MonoBehaviour
                 cubes[i].loaded = true;
             }
         }
+
         ash.Initialize();
 
         for (int i = 0; i < cubes.Length; i ++)

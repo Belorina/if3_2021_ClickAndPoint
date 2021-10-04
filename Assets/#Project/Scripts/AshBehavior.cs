@@ -17,6 +17,7 @@ public class AshBehavior : MonoBehaviour
     
     public void Initialize()
     {
+
         if(materials == null || materials.Length < 4)
         {
             Debug.LogError("This component need 4 materials", gameObject); 
